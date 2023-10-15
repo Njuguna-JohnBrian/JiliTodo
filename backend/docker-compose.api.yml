@@ -1,0 +1,15 @@
+version: '3.8'
+networks:
+  default:
+    name: jilitodo-network
+services:
+  api:
+    container_name: jilitodo-api
+    image: jilitodo-network
+    build:
+      context: .
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    ports:
+      - "4526:4526"

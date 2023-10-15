@@ -5,7 +5,11 @@
   "main": "server.js",
   "scripts": {
     "test": "test",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "dev": "set NODE_ENV=dev && nodemon server.ts",
+    "prod": "set NODE_ENV=prod && nodemon server.ts",
+    "migrate": "npx knex migrate:latest --knexfile __database__/knexfile.js",
+    "seed": "npx knex --knexfile __database__/knexfile.js seed:run"
   },
   "repository": {
     "type": "git",
