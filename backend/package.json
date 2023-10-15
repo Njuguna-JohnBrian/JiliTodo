@@ -1,0 +1,31 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "JiliTodo Api",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Njuguna-JohnBrian/JiliTodo.git"
+  },
+  "author": "Njuguna JohnBrian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Njuguna-JohnBrian/JiliTodo/issues"
+  },
+  "homepage": "https://github.com/Njuguna-JohnBrian/JiliTodo#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "knex": "^3.0.1",
+    "lodash": "^4.17.21",
+    "pg": "^8.11.3",
+    "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

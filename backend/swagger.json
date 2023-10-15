@@ -1,0 +1,72 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "JiliTodo Api",
+      "description": "JiliTodo Api",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:4526/api/jilitodo/swagger"
+      }
+    ],
+    "paths": {
+      "/dev/health": {
+        "get": {
+          "summary": "Check JiliTodo Api health",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json":{
+                  "schema": {
+                    "$ref": "#/components/schemas/HealthSuccessResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Error",
+              "content": {
+                "application/json":{
+                  "schema": {
+                    "$ref": "#/components/schemas/HealthErrorResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "HealthSuccessResponse": {
+          "type": "object",
+          "properties": {
+            "success": {
+              "type": "boolean",
+              "example": true
+            },
+            "message": {
+              "type": "string",
+              "example": "JiliTodo Api is healthy"
+            }
+          }
+        },
+        "HealthErrorResponse": {
+          "type": "object",
+          "properties": {
+            "success": {
+              "type": "boolean",
+              "example": false
+            },
+            "message": {
+              "type": "string",
+              "example": "JiliTodo Api is down"
+            }
+          }
+        }
+      }
+    }
+  }
