@@ -9,6 +9,8 @@ const db_middleware = [
      */
     const connection = await db_config.client.acquireConnection();
 
+   
+
     const db_context = db_helper(connection);
 
     res.on("close", () => db_config.client.releaseConnection(connection));
