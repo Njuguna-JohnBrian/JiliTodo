@@ -2,7 +2,7 @@ require("dotenv").config({ path: "../.env" });
 module.exports = {
   client: "pg",
   connection: {
-    host: process.env.DATABASE_SERVER,
+    host: process.env.DATABASE_SERVER, //change to localhost when migrating
     user: process.env.DATABASE_USER,
     port: Number(process.env.DATABASE_PORT),
     password: process.env.DATABASE_PASSWORD,
