@@ -4,6 +4,7 @@ const swagger = require("swagger-ui-express");
 
 const swaggerUi = require("./swagger.json");
 const { db_middleware } = require("./middlewares/db_middleware");
+const { health } = require("./routes/health.router");
 
 const app = express();
 
@@ -15,12 +16,17 @@ const baseurl = "/api/jilitodo";
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 /**
  * mount custom middleware
  */
 
 app.use(db_middleware);
+
+/**
+ * mount routes
+ */
+
+app.use(baseurl, health);
 
 /**
  * mount swagger
