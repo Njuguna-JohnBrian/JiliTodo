@@ -8,7 +8,7 @@ const db_helper = (connection) => ({
     columns = "*",
     orderParam,
     orderBy,
-    limitSingle = true,
+    limitSingle = true
   ) => {
     let query = db_config.select(columns).from(tableName).where(whereParams);
 
