@@ -8,8 +8,8 @@
     "start": "set NODE_ENV=dev && nodemon --legacy-watch --inspect=0.0.0.0 server.js",
     "dev": "set NODE_ENV=dev && start http://localhost:4526/api/jilitodo/swagger/#/ && nodemon server.js",
     "prod": "set NODE_ENV=prod && nodemon server.js",
-    "migrate": "npx knex migrate:latest --knexfile __database__/knexfile.js",
-    "seed": "npx knex --knexfile __database__/knexfile.js seed:run"
+    "migrate": "npx knex migrate:latest --knexfile database/knexfile.js",
+    "seed": "npx knex --knexfile database/knexfile.js seed:run"
   },
   "repository": {
     "type": "git",

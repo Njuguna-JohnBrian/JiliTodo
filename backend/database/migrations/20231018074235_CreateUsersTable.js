@@ -5,10 +5,10 @@
 exports.up = async function(knex) {
   await knex.schema.createTable("Users", (table)=>{
     table.increments("id").primary().notNullable();
-    table.uuid("userId").notNullable();
+    table.uuid("userId").unique().index("IX_Users_userId").notNullable();
     table.string("firstName").notNullable();
     table.string("lastName").notNullable();
-    table.string("email").notNullable().unique();
+    table.string("email").index("UQ_Users_email").unique().notNullable();
     table.string("passwordHash").notNullable();
     table.string("passwordResetToken").nullable();
     table.boolean("isActive").defaultTo(true);

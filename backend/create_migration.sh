@@ -18,7 +18,7 @@ while true; do
   else
     # Valid description provided, create the migration file
     echo "Creating migration file: ${description}"
-    cd "__database__"
+    cd "database"
     npx knex migrate:make ${description}
     break  # Exit the loop
   fi

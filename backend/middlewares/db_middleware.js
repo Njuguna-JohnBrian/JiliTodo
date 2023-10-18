@@ -1,5 +1,5 @@
-const { db_helper } = require("../__database__/helpers/db_helper");
-const { db_config } = require("../__database__/db_config");
+const { db_helper } = require("../database/helpers/db_helper");
+const { db_config } = require("../database/db_config");
 
 
 const db_middleware = [
