@@ -5,6 +5,7 @@ const swagger = require("swagger-ui-express");
 const swaggerUi = require("./swagger.json");
 const { db_middleware } = require("./middlewares/db_middleware");
 const { health } = require("./routes/health.router");
+const { auth } = require("./routes/auth.router");
 
 const app = express();
 
@@ -19,14 +20,13 @@ app.use(express.urlencoded({ extended: true }));
 /**
  * mount custom middleware
  */
-
 app.use(db_middleware);
 
 /**
  * mount routes
  */
-
 app.use(baseurl, health);
+app.use(baseurl, auth);
 
 /**
  * mount swagger
