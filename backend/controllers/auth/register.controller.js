@@ -16,7 +16,7 @@ const registerUser = (req, res) => {
       return res.status(400).json({ errors: errors.array() })
     }
 
-    return res.status(201).json({
+    return res.status(200).json({
       success: true,
       message: "Registered successfully"
     });
