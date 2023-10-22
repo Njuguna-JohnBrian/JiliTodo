@@ -5,7 +5,7 @@ const registerUser = (req, res) => {
     /**
      * destructure properties
      */
-    const { firstname, lastname, email } = req.body;
+    const { firstname, lastname, email, password, confimPassword } = req.body;
 
     /**
      * validate properties
