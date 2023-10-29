@@ -6,7 +6,7 @@ const registerUser = async (req, res) => {
     /**
      * destructure properties
      */
-    let { firstname, lastname, email, password, confirmPassword } = req.body;
+    let { firstname, lastname, email, password } = req.body;
 
     /**
      * validate properties
