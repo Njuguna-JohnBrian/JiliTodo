@@ -1,11 +1,12 @@
 const { validationResult } = require("express-validator");
+const { hashPassword } = require("../../helpers/auth");
 
-const registerUser = (req, res) => {
+const registerUser = async (req, res) => {
   try {
     /**
      * destructure properties
      */
-    const { firstname, lastname, email, password, confirmPassword } = req.body;
+    let { firstname, lastname, email, password, confirmPassword } = req.body;
 
     /**
      * validate properties
@@ -15,6 +16,11 @@ const registerUser = (req, res) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors["errors"] });
     }
+
+    /**
+     * hash password
+     */
+    password = await hashPassword(password);
 
     return res.status(200).json({
       success: true,
