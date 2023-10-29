@@ -1,6 +1,5 @@
-
 /**
- * 
+ *
  * @param {*} req request body object
  * @param {*} res response body object
  * @returns true if healthy, false if errored
