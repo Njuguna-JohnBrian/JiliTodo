@@ -5,7 +5,7 @@ const hashPassword = (rawPassword) => {
   return bcrypt.hashSync(rawPassword, Number(process.env.PASSWORD_SALT_ROUNDS));
 };
 
-const createAuthCookie = (res, statusCode = 200, cookiePayload) => {
+const createAuthCookie = (res, cookiePayload) => {
   const cookie = jwt.sign(cookiePayload, process.env.JWT_SECRET, {
     expiresIn: process.env.COOKIE_EXPIRES_TIME,
   });
