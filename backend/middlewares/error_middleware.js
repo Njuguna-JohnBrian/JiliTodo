@@ -1,4 +1,4 @@
-const ErrorHandler = require("../helpers/errorHandler");
+const ErrorHandler = require("../helpers/errorHandler.helper");
 
 const error_middleware = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
