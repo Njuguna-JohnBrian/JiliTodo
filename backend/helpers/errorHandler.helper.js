@@ -1,8 +1,8 @@
 /**
- * Create custom `ErrorHandlerHelper` class
+ * Create custom `ErrorHandler` class
  * that inherit the behavior of the built-in Error class
  */
-class ErrorHandlerHelper extends Error {
+class ErrorHandler extends Error {
   constructor(message, statusCode) {
     super(message);
 
@@ -11,4 +11,4 @@ class ErrorHandlerHelper extends Error {
     Error.captureStackTrace(this, this.constructor);
   }
 }
-module.exports = ErrorHandlerHelper;
+module.exports = ErrorHandler;

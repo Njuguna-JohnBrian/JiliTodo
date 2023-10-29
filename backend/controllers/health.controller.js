@@ -1,5 +1,5 @@
-const { CatchAsyncErrors } = require("../helpers/catchAsyncErrors");
-const ErrorHandler = require("../helpers/errorHandler");
+const { CatchAsyncErrors } = require("../helpers/catchAsyncErrors.helper");
+const ErrorHandler = require("../helpers/errorHandler.helper");
 /**
  *
  * @param {*} req request body object
