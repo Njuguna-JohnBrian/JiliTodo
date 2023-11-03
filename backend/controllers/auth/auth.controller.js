@@ -1,5 +1,6 @@
 const { CatchAsyncErrors } = require("../../helpers/catchAsyncErrors.helper");
 const { hashPassword, createAuthCookie } = require("../../helpers/auth.helper");
+const { responseHelper } = require("../../helpers/responseHelper");
 const registerUser = CatchAsyncErrors(async (req, res, next) => {
   /**
    * destructure properties
@@ -11,11 +12,7 @@ const registerUser = CatchAsyncErrors(async (req, res, next) => {
    */
   const userExists = await req.db_context.exec("findUser", [email]);
 
-  if (userExists != null)
-    return res.status(409).json({
-      success: false,
-      message: "User exists",
-    });
+  if (userExists != null) responseHelper(res, 409, false, "User exists");
 
   /**
    * hash password
@@ -30,20 +27,19 @@ const registerUser = CatchAsyncErrors(async (req, res, next) => {
     lastname,
     email,
     password,
-    1,
   ]);
 
+  /**
+   * return auth cookie
+   */
   createAuthCookie(res, {
     firstname: firstname,
     lastname: lastname,
     email: email,
+    userid: saveUser["userid"],
   });
 
-  return res.status(200).json({
-    success: true,
-    message: "Registered successfully",
-    result: saveUser,
-  });
+  responseHelper(res, 200, true, "Registered successfully");
 });
 
 module.exports = { registerUser };
