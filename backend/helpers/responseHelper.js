@@ -8,7 +8,7 @@
  * @returns {*}
  */
 const responseHelper = (res, statusCode, isSuccess, message, result) => {
-  return res.status(statusCode).json({
+  res.status(statusCode).json({
     success: isSuccess,
     message: message,
     result: result,
