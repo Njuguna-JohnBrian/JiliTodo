@@ -1,13 +1,11 @@
 const jilitodo_seed = [
   {
-    id: 1,
-    userId: "142e8446-f5ba-4813-bfb5-f3192a37f1bf",
-    firstName: "Jili",
-    lastName: "Todo",
+    firstname: "Jili",
+    lastname: "Todo",
     email: "jilitodo@gmail.com",
-    passwordHash: "5994471abb01112afcc18159f6cc74b4f511b9980",
-    createdBy: 1,
-    createdDTM: "2023-11-03 19:10:25-07",
+    passwordhash: "5994471abb01112afcc18159f6cc74b4f511b9980",
+    createdby: 1,
+    createddtm: "2023-11-03 19:10:25-07",
   },
 ];
 
