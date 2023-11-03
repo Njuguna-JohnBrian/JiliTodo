@@ -12,7 +12,7 @@ const registerUser = CatchAsyncErrors(async (req, res, next) => {
    */
   const userExists = await req.db_context.exec("findUser", [email]);
 
-  if (userExists != null) responseHelper(res, 409, false, "User exists");
+  if (userExists != null) return responseHelper(res, 409, false, "User exists");
 
   /**
    * hash password
@@ -39,7 +39,7 @@ const registerUser = CatchAsyncErrors(async (req, res, next) => {
     userid: saveUser["userid"],
   });
 
-  responseHelper(res, 200, true, "Registered successfully");
+  return responseHelper(res, 200, true, "Registered successfully");
 });
 
 module.exports = { registerUser };
