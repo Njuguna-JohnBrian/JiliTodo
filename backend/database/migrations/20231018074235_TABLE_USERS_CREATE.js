@@ -17,7 +17,7 @@ exports.up = async function (knex) {
     table.string("passwordhash").notNullable();
     table.string("passwordresettoken").nullable();
     table.boolean("isactive").defaultTo(true);
-    table.integer("createdby").notNullable();
+    table.integer("createdby").nullable();
     table.dateTime("createddtm").notNullable();
     table.integer("updatedby").nullable();
     table.dateTime("updateddtm").nullable();
