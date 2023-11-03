@@ -1,4 +1,3 @@
-const knex = require("knex");
 const jilitodo_seed = [
   {
     id: 1,
