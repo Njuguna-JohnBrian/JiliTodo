@@ -13,13 +13,13 @@ $BODY$
 
 BEGIN
     SELECT json_build_object(
-                   'userId', u."userId",
-                   'firstName', u."firstName",
-                   'lastName', u."lastName",
+                   'userId', u."userid",
+                   'firstName', u."firstname",
+                   'lastName', u."lastname",
                    'email', u."email",
-                   'isActive', u."isActive",
-                   'createdBy', u."createdBy",
-                   'createdDTM', u."createdDTM"
+                   'isActive', u."isactive",
+                   'createdBy', u."createdby",
+                   'createdDTM', u."createddtm"
            )
     FROM public."Users" u
     WHERE u.email = userEmail
