@@ -15,13 +15,23 @@ const registerUser = CatchAsyncErrors(async (req, res, next) => {
     return res.status(409).json({
       success: false,
       message: "User exists",
-      result: userExists,
     });
 
   /**
    * hash password
    */
   password = await hashPassword(password);
+
+  /**
+   * save user in db
+   */
+  const saveUser = await req.db_context.exec("UserSave", [
+    firstname,
+    lastname,
+    email,
+    password,
+    1,
+  ]);
 
   createAuthCookie(res, {
     firstname: firstname,
@@ -32,6 +42,7 @@ const registerUser = CatchAsyncErrors(async (req, res, next) => {
   return res.status(200).json({
     success: true,
     message: "Registered successfully",
+    result: saveUser,
   });
 });
 
