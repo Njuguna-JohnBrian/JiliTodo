@@ -37,3 +37,5 @@ const error_middleware = (err, req, res, next) => {
 };
 
 module.exports = { error_middleware };
+
+//TODO:catch 'error' encountered due to wrong column reference
