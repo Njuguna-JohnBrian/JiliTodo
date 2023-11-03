@@ -16,6 +16,7 @@ const error_middleware = (err, req, res, next) => {
 
     error.message = err.message;
 
+    // TOKEN ERRORS
     /**
      * wrong JWT error
      */
@@ -28,6 +29,17 @@ const error_middleware = (err, req, res, next) => {
      */
     if (err.name === "TokenExpiredError") {
       error = new ErrorHandler("Token is expired. Kindly login", 400);
+    }
+
+    // DB ERRORS
+    /**
+     * unique check  errors
+     */
+    if (new RegExp(/unique/i).test(err["routine"].toLowerCase())) {
+      error = new ErrorHandler(
+        "Duplicate entries not allowed. Please retry",
+        409,
+      );
     }
     res.status(err.statusCode).json({
       success: false,
