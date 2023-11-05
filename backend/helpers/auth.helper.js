@@ -1,6 +1,9 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+/**
+ * @param {string} rawPassword
+ */
 const hashPassword = (rawPassword) => {
   return bcrypt.hashSync(rawPassword, Number(process.env.PASSWORD_SALT_ROUNDS));
 };
