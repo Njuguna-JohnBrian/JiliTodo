@@ -18,6 +18,11 @@ const authValidations = {
       (value, { req }) => value === req.body.password,
     ),
   ],
+  login: [
+    check("email", "Email is required").notEmpty(),
+    check("email", "Email is not valid").isEmail().normalizeEmail(),
+    check("password", "Password is required").notEmpty(),
+  ],
 };
 
 module.exports = { authValidations };
