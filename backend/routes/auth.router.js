@@ -1,7 +1,10 @@
 const express = require("express");
 const { check } = require("express-validator");
 
-const { registerUser } = require("../controllers/auth/auth.controller");
+const {
+  registerUser,
+  loginUser,
+} = require("../controllers/auth/auth.controller");
 const {
   payloadValidationErrors,
 } = require("../helpers/payloadValidationErrors.helper");
@@ -11,11 +14,24 @@ const auth = express.Router();
 
 const authBaseUrl = "/auth/user";
 
+/**
+ * register route
+ */
 auth.post(
   authBaseUrl + "/register",
   authValidations["registration"],
   payloadValidationErrors,
   registerUser,
+);
+
+/**
+ * login route
+ */
+auth.post(
+  authBaseUrl + "/login",
+  authValidations["login"],
+  payloadValidationErrors,
+  loginUser,
 );
 
 module.exports = { auth };
