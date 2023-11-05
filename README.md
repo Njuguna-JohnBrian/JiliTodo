@@ -4,8 +4,9 @@
 ![Express](https://img.shields.io/badge/Express-4.17+-blue.svg)
 ![Knex](https://img.shields.io/badge/Knex-0.95+-orange.svg)
 ![Express Validator](https://img.shields.io/badge/Express%20Validator-6.9+-purple.svg)
+![Angular](https://img.shields.io/badge/Angular-v17.0+-red.svg)
 
-This is a feature-rich, secure, and scalable Node.js todo application built with Express and Knex, complete with user authentication using cookies and role-based access control. It allows you to create, manage, and organize your tasks efficiently, all within a responsive web application.
+This is a feature-rich, secure, and scalable Node.js todo application built with Express and Knex, complete with user authentication using cookies and role-based access control. It allows you to create, manage, and organize your tasks efficiently, all within a responsive web application. The frontend is developed using Angular v17, making use of the latest Angular features, including signals.
 
 ## Table of Contents
 
@@ -24,7 +25,8 @@ This is a feature-rich, secure, and scalable Node.js todo application built with
 - Organize tasks by categories and prioritize them
 - Intuitive user interface with real-time updates
 - Secure API endpoints with proper validation
-- Data storage and retrieval with Knex and a SQL database
+- Data storage and retrieval with Knex and a PostgreSQL database
+- Modern and responsive frontend built with Angular v17, utilizing the latest features including signals.
 
 ## Getting Started
 
@@ -40,7 +42,7 @@ This is a feature-rich, secure, and scalable Node.js todo application built with
     npm install
     ```
 
-3. Set up your database configuration in `config/knexfile.js`
+3. Set up your database configuration in `backend/database/knexfile.js`
 
 4. Run migrations and seed the database:
 
