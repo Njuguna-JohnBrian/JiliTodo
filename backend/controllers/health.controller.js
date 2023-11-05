@@ -5,6 +5,7 @@ const { responseHelper } = require("../helpers/responseHelper");
  *
  * @param {*} req request body object
  * @param {*} res response body object
+ * @param {*} next next function
  * @returns true if healthy, false if errored
  */
 const checkHealth = CatchAsyncErrors(async (req, res, next) => {
