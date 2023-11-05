@@ -3,6 +3,8 @@ const ErrorHandler = require("./errorHandler.helper");
 
 /**
  * @param {Request} req
+ * @param res
+ * @param next
  */
 const payloadValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
