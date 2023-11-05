@@ -1,6 +1,11 @@
 const { CatchAsyncErrors } = require("../../helpers/catchAsyncErrors.helper");
 const { hashPassword, createAuthCookie } = require("../../helpers/auth.helper");
 const { responseHelper } = require("../../helpers/responseHelper");
+
+/**
+ *
+ * @type {function(*, *, *): Promise<Awaited<*>>}
+ */
 const registerUser = CatchAsyncErrors(async (req, res, next) => {
   /**
    * destructure properties
