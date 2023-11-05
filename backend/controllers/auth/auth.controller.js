@@ -1,5 +1,9 @@
 const { CatchAsyncErrors } = require("../../helpers/catchAsyncErrors.helper");
-const { hashPassword, createAuthCookie } = require("../../helpers/auth.helper");
+const {
+  hashPassword,
+  createAuthCookie,
+  checkPassword,
+} = require("../../helpers/auth.helper");
 const { responseHelper } = require("../../helpers/responseHelper");
 
 /**
@@ -47,4 +51,41 @@ const registerUser = CatchAsyncErrors(async (req, res, next) => {
   return responseHelper(res, 200, true, "Registered successfully");
 });
 
-module.exports = { registerUser };
+/**
+ *
+ * @type {function(*, *, *): Promise<Awaited<*>>}
+ */
+const loginUser = CatchAsyncErrors(async (req, res, next) => {
+  let { email, password } = req.body;
+
+  /**
+   * check if user exists
+   */
+  const userExists = await req.db_context.search("Users", {
+    email: email,
+  });
+
+  if (userExists === null)
+    return responseHelper(
+      res,
+      404,
+      false,
+      "Email or password is wrong. Try again!",
+    );
+
+  /**
+   * compare passwords
+   */
+  const isPassword = await checkPassword(password, userExists["passwordhash"]);
+
+  if (!isPassword)
+    return responseHelper(
+      res,
+      404,
+      false,
+      "Email or password is wrong. Try again!",
+    );
+
+  return responseHelper(res, 200, "Login was successful");
+});
+module.exports = { registerUser, loginUser };
