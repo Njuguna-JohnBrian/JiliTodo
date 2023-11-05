@@ -10,6 +10,16 @@ const hashPassword = (rawPassword) => {
 
 /**
  *
+ * @param submittedPassword
+ * @param dbPasswordHash
+ * @returns {*}
+ */
+const checkPassword = (submittedPassword, dbPasswordHash) => {
+  return bcrypt.compareSync(submittedPassword, dbPasswordHash);
+};
+
+/**
+ *
  * @param res
  * @param cookiePayload
  */
@@ -24,4 +34,4 @@ const createAuthCookie = (res, cookiePayload) => {
   });
 };
 
-module.exports = { hashPassword, createAuthCookie };
+module.exports = { hashPassword, createAuthCookie, checkPassword };
