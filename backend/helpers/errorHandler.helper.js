@@ -3,6 +3,10 @@
  * that inherit the behavior of the built-in Error class
  */
 class ErrorHandler extends Error {
+  /**
+   * @param {*} message
+   * @param {number} statusCode
+   */
   constructor(message, statusCode) {
     super(message);
 
