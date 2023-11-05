@@ -1,6 +1,9 @@
 const { validationResult } = require("express-validator");
 const ErrorHandler = require("./errorHandler.helper");
 
+/**
+ * @param {Request} req
+ */
 const payloadValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
 
