@@ -86,6 +86,29 @@ const loginUser = CatchAsyncErrors(async (req, res, next) => {
       "Email or password is wrong. Try again!",
     );
 
+  /**
+   * return auth cookie
+   */
+  createAuthCookie(res, {
+    firstname: userExists["firstname"],
+    lastname: userExists["lastname"],
+    email: userExists["email"],
+    userid: userExists["userid"],
+  });
+
   return responseHelper(res, 200, "Login was successful");
 });
-module.exports = { registerUser, loginUser };
+
+/**
+ *
+ * @type {function(*, *, *): Promise<Awaited<*>>}
+ */
+const logoutUser = CatchAsyncErrors(async (req, res, next) => {
+  res.cookie("cookie", null, {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+  });
+
+  return responseHelper(res, 200, true, "Logout successful");
+});
+module.exports = { registerUser, loginUser, logoutUser };
