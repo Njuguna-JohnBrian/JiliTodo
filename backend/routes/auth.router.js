@@ -4,6 +4,7 @@ const { check } = require("express-validator");
 const {
   registerUser,
   loginUser,
+  logoutUser,
 } = require("../controllers/auth/auth.controller");
 const {
   payloadValidationErrors,
@@ -33,5 +34,10 @@ auth.post(
   payloadValidationErrors,
   loginUser,
 );
+
+/**
+ * logout route
+ */
+auth.post(authBaseUrl + "/logout", logoutUser);
 
 module.exports = { auth };
