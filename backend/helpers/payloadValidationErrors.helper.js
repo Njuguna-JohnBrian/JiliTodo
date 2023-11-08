@@ -11,8 +11,10 @@ const payloadValidationErrors = (req, res, next) => {
 
   if (!errors.isEmpty()) {
     return next(
-      new ErrorHandler(errors["errors"].map((error) => error.msg).join(" / ")),
-      400,
+      new ErrorHandler(
+        errors["errors"].map((error) => error.msg).join(" / "),
+        400,
+      ),
     );
   }
   next();
