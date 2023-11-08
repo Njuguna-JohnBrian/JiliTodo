@@ -1,6 +1,6 @@
-const { CatchAsyncErrors } = require("../helpers/catchAsyncErrors.helper");
-const ErrorHandler = require("../helpers/errorHandler.helper");
-const { responseHelper } = require("../helpers/responseHelper");
+const { CatchAsyncErrors } = require("../../helpers/catchAsyncErrors.helper");
+const ErrorHandler = require("../../helpers/errorHandler.helper");
+const { responseHelper } = require("../../helpers/responseHelper");
 /**
  *
  * @param {*} req request body object
@@ -10,7 +10,7 @@ const { responseHelper } = require("../helpers/responseHelper");
  */
 const checkHealth = CatchAsyncErrors(async (req, res, next) => {
   if (req.errored)
-    return next(new ErrorHandler("Jilitodo api is running into problems"), 404);
+    return next(new ErrorHandler("Jilitodo api is running into problems", 404));
 
   return responseHelper(res, 200, true, "Jilitodo api is healthy");
 });
