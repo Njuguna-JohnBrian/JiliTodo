@@ -10,8 +10,13 @@ const jilitodo_seed = [
 ];
 
 const seed = async (knex) => {
-  await knex("Users").truncate();
-  await knex("Users").insert(jilitodo_seed);
+  const userCount = await knex("Users").count("id as count").first();
+  if (Number(userCount.count) === 0) {
+    await knex("Users").truncate();
+    await knex("Users").insert(jilitodo_seed);
+  } else {
+    console.info("Users table has records\nSkipping seeding");
+  }
 };
 
 module.exports = { seed };
