@@ -1,10 +1,11 @@
 const { CatchAsyncErrors } = require("../../helpers/catchAsyncErrors.helper");
 const {
   hashPassword,
-  createAuthCookie,
+  createCookie,
   checkPassword,
 } = require("../../helpers/auth.helper");
 const { responseHelper } = require("../../helpers/responseHelper");
+const { isEmpty } = require("lodash");
 
 /**
  *
@@ -41,7 +42,7 @@ const registerUser = CatchAsyncErrors(async (req, res, next) => {
   /**
    * return auth cookie
    */
-  createAuthCookie(res, {
+  createCookie(res, {
     firstname: firstname,
     lastname: lastname,
     email: email,
@@ -65,7 +66,7 @@ const loginUser = CatchAsyncErrors(async (req, res, next) => {
     email: email,
   });
 
-  if (userExists === null)
+  if (isEmpty(userExists))
     return responseHelper(
       res,
       404,
@@ -89,7 +90,7 @@ const loginUser = CatchAsyncErrors(async (req, res, next) => {
   /**
    * return auth cookie
    */
-  createAuthCookie(res, {
+  createCookie(res, {
     firstname: userExists["firstname"],
     lastname: userExists["lastname"],
     email: userExists["email"],
