@@ -3,7 +3,7 @@ module.exports = {
   client: "pg",
   connection: {
     host: process.env.DATABASE_SERVER,
-    //host: "localhost", //use localhost when doing db migrations
+    // host: "localhost", //use localhost when doing db migrations
     user: process.env.DATABASE_USER,
     port: Number(process.env.DATABASE_PORT),
     password: process.env.DATABASE_PASSWORD,
