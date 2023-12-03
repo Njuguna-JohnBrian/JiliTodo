@@ -3,7 +3,6 @@ const { responseHelper } = require("../../helpers/responseHelper");
 const { isEmpty } = require("lodash/lang");
 const {
   createCookie,
-  decodeToken,
   verifyToken,
   hashPassword,
 } = require("../../helpers/auth.helper");
