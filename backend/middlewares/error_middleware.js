@@ -35,11 +35,18 @@ const error_middleware = (err, req, res, next) => {
     /**
      * unique check  errors
      */
-    if (new RegExp(/unique/i).test(err["routine"].toLowerCase())) {
+    if (new RegExp(/unique/i).test(err["routine"]?.toLowerCase())) {
       error = new ErrorHandler(
         "Duplicate entries not allowed. Please retry",
         409,
       );
+    }
+
+    /**
+     * Unexpected token error
+     */
+    if (err.stack.includes("Unexpected token")) {
+      error = new ErrorHandler("Please check your data format and retry", 400);
     }
     res.status(err.statusCode).json({
       success: false,
