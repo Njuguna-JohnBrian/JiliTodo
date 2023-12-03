@@ -8,6 +8,7 @@ const { error_middleware } = require("./middlewares/error_middleware");
 const { health } = require("./routes/health.router");
 const { auth } = require("./routes/auth.router");
 const { password } = require("./routes/password.router");
+const { user } = require("./routes/user.router");
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(db_middleware);
 app.use(baseurl, health);
 app.use(baseurl, auth);
 app.use(baseurl, password);
+app.use(baseurl, user);
 
 /**
  *mount error middleware
