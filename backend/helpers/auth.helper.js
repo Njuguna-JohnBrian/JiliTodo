@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const { sign, verify } = require("jsonwebtoken");
 
 /**
  * @param {string} rawPassword
@@ -25,7 +25,7 @@ const checkPassword = (submittedPassword, dbPasswordHash) => {
  * @param isAuthCookie
  */
 const createCookie = (res, cookiePayload, isAuthCookie = true) => {
-  const cookie = jwt.sign(cookiePayload, process.env.JWT_SECRET, {
+  const cookie = sign(cookiePayload, process.env.JWT_SECRET, {
     expiresIn: process.env.COOKIE_EXPIRES_TIME,
   });
 
@@ -39,4 +39,19 @@ const createCookie = (res, cookiePayload, isAuthCookie = true) => {
   }
 };
 
-module.exports = { hashPassword, createCookie, checkPassword };
+const verifyToken = (userToken) => {
+  if (typeof verify(userToken, process.env.JWT_SECRET) == "object") {
+    if (Date.now() >= verify(userToken, process.env.JWT_SECRET).exp * 1000) {
+      throw Error("TokenExpiredError");
+    } else {
+      return verify(userToken, process.env.JWT_SECRET);
+    }
+  }
+};
+
+module.exports = {
+  hashPassword,
+  createCookie,
+  checkPassword,
+  verifyToken,
+};
