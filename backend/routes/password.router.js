@@ -5,7 +5,9 @@ const {
 } = require("../helpers/payloadValidationErrors.helper");
 const {
   forgotPassword,
+  resetPassword,
 } = require("../controllers/password/password.controller");
+
 const { passwordValidations } = require("../validations/password.validations");
 
 const password = express.Router();
@@ -20,6 +22,16 @@ password.post(
   passwordValidations["forgotPassword"],
   payloadValidationErrors,
   forgotPassword,
+);
+
+/**
+ * reset password route
+ */
+password.post(
+  passwordBaseUrl + "/reset/:token",
+  passwordValidations["resetPassword"],
+  payloadValidationErrors,
+  resetPassword,
 );
 
 module.exports = { password };
