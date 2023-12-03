@@ -1,6 +1,4 @@
 const express = require("express");
-const { check } = require("express-validator");
-
 const {
   registerUser,
   loginUser,
@@ -13,7 +11,7 @@ const { authValidations } = require("../validations/auth.validations");
 
 const auth = express.Router();
 
-const authBaseUrl = "/auth/user";
+const authBaseUrl = "/auth";
 
 /**
  * register route
