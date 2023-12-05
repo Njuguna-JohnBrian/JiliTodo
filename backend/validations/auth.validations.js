@@ -1,10 +1,15 @@
 const { check } = require("express-validator");
+const { isUUID } = require("validator");
 const authValidations = {
   registration: [
     check("firstname", "Firstname is required").notEmpty().trim(),
     check("lastname", "Lastname is required").notEmpty().trim(),
     check("email", "Email is required").notEmpty(),
     check("email", "Email is not valid").isEmail().normalizeEmail(),
+    check("roleid", "Role is required").notEmpty(),
+    check("roleid", "Role not found or does not exist").custom(
+      (value, { req }) => isUUID(value, 4),
+    ),
     check("password", "Password is required").notEmpty(),
     check(
       "password",
