@@ -7,8 +7,8 @@ const authValidations = {
     check("email", "Email is required").notEmpty(),
     check("email", "Email is not valid").isEmail().normalizeEmail(),
     check("roleid", "Role is required").notEmpty(),
-    check("roleid", "Role not found or does not exist").custom(
-      (value, { req }) => isUUID(value, 4),
+    check("roleid", "Role not found or does not exist").custom((value) =>
+      isUUID(value, 4),
     ),
     check("password", "Password is required").notEmpty(),
     check(
