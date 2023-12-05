@@ -6,7 +6,7 @@ const {
 } = require("../../helpers/auth.helper");
 const { responseHelper } = require("../../helpers/responseHelper");
 const { isEmpty } = require("lodash");
-
+const ErrorHandler = require("../../helpers/errorHandler.helper");
 /**
  *
  * @type {function(*, *, *): Promise<Awaited<*>>}
@@ -15,14 +15,29 @@ const registerUser = CatchAsyncErrors(async (req, res, next) => {
   /**
    * destructure properties
    */
-  let { firstname, lastname, email, password } = req.body;
+  let { firstname, lastname, email, password, roleid } = req.body;
 
   /**
    * check if user exists
    */
   const userExists = await req.db_context.exec("findUser", [email]);
 
-  if (userExists != null) return responseHelper(res, 409, false, "User exists");
+  if (!isEmpty(userExists))
+    return responseHelper(res, 409, false, "User exists");
+
+  /**
+   * check if role exists
+   */
+  const roleExists = await req.db_context.search("Roles", { roleid: roleid });
+
+  if (isEmpty(roleExists))
+    return next(new ErrorHandler("Role not found or does not exist", 404));
+
+  if (roleExists.rolename === "admin") {
+    return next(
+      new ErrorHandler("Elevated permissions are needed for this action", 400),
+    );
+  }
 
   /**
    * hash password
@@ -36,17 +51,28 @@ const registerUser = CatchAsyncErrors(async (req, res, next) => {
     firstname,
     lastname,
     email,
+    roleExists["id"],
     password,
   ]);
+
+  if (isEmpty(saveUser))
+    return next(new ErrorHandler("Registration failed. Please retry", 500));
+
+  const updateData = {
+    createdby: saveUser["id"],
+  };
+
+  await req.db_context.update("Users", { id: saveUser["id"] }, updateData);
 
   /**
    * return auth cookie
    */
   createCookie(res, {
-    firstname: firstname,
-    lastname: lastname,
-    email: email,
+    firstname: saveUser["firstname"],
+    lastname: saveUser["lastname"],
+    email: saveUser["email"],
     userid: saveUser["userid"],
+    rolename: roleExists.rolename,
   });
 
   return responseHelper(res, 200, true, "Registered successfully");
@@ -62,9 +88,7 @@ const loginUser = CatchAsyncErrors(async (req, res, next) => {
   /**
    * check if user exists
    */
-  const userExists = await req.db_context.search("Users", {
-    email: email,
-  });
+  const userExists = await req.db_context.exec("findUser", [email]);
 
   if (isEmpty(userExists))
     return responseHelper(
@@ -91,10 +115,11 @@ const loginUser = CatchAsyncErrors(async (req, res, next) => {
    * return auth cookie
    */
   createCookie(res, {
-    firstname: userExists["firstname"],
-    lastname: userExists["lastname"],
+    firstname: userExists["firstName"],
+    lastname: userExists["lastName"],
     email: userExists["email"],
-    userid: userExists["userid"],
+    userid: userExists["userId"],
+    rolename: userExists["rolename"],
   });
 
   return responseHelper(res, 200, "Login was successful");
