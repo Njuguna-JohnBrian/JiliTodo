@@ -4,7 +4,7 @@
  */
 exports.up = async function (knex) {
   await knex.schema
-    .raw(`DROP PROCEDURE IF EXISTS public.usersave(varchar, varchar, varchar, integer, varchar, integer, inout json);
+    .raw(`DROP PROCEDURE IF EXISTS public.usersave(varchar, varchar, varchar, varchar, inout json);
 CREATE OR REPLACE PROCEDURE public.UserSave(IN IN_FirstName character varying, IN IN_LastName character varying,
                                             IN IN_Email character varying,IN IN_Role_Id integer, IN IN_PasswordHash character varying,
                                             INOUT jsonResult json DEFAULT NULL::json)
@@ -28,6 +28,6 @@ $BODY$`);
  */
 exports.down = async function (knex) {
   await knex.schema.raw(
-    `DROP PROCEDURE IF EXISTS public.usersave(varchar, varchar, varchar, integer, varchar, integer, inout json);`,
+    `DROP PROCEDURE IF EXISTS public.usersave(varchar, varchar, varchar, integer, varchar, inout json);`,
   );
 };
