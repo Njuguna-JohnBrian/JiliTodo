@@ -8,9 +8,24 @@ const isAuthenticated = CatchAsyncErrors(async (req, res, next) => {
   if (!token)
     return next(new ErrorHandler("Login first to access this resource", 400));
 
-  req.user = verifyToken(token);
+  const userTokenData = verifyToken(token);
+  req.user = await req.db_context.exec("finduser", [userTokenData["email"]]);
 
   next();
 });
 
-module.exports = { isAuthenticated };
+const authorizedRoles = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.rolename)) {
+      return next(
+        new ErrorHandler(
+          "You don't have permission to perform this action",
+          403,
+        ),
+      );
+    }
+    next();
+  };
+};
+
+module.exports = { isAuthenticated, authorizedRoles };
