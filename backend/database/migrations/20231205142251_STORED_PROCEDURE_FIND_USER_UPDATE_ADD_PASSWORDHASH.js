@@ -13,6 +13,7 @@ $BODY$
 
 BEGIN
     SELECT json_build_object(
+                   'id', u."id",
                    'userId', u."userid",
                    'firstName', u."firstname",
                    'lastName', u."lastname",
